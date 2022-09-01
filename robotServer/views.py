@@ -16,25 +16,43 @@ import json
 def index(request):
     return render(request, "robotServer/index.html")
 
-def toRover(request):
-    HOST, PORT = "localhost", 3000
+def drive(request):
+    HOST, PORT = "localhost", 5000
 
-    m ='{"hearbeat": 2}'
+    m ="{ hearbeat_count: 0,\n is_operational: 0,\n wheel_shift: 0,\n drive_mode: 'D',\n speed: 0,\n angle: 0 }"
+
+  {\n"
+    "  \"heartbeat_count\": %d,\n"
+    "  \"is  _operational\": %d,\n"
+    "  \"wheel_shift\": %d,\n"
+    "  \"drive_mode\": \"%c\",\n"
+    "  \"speed\": %d,\n"
+    "  \"angle\": %d\n"
+    "}
     jsonObj = json.loads(m)
 
     data = jsonObj
 
     sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
-    try:
-        # Connect to server and send data
-        sock.connect((HOST, PORT))
-        sock.sendall(jsonObj)
+    if request.method == "POST":
+        try:
+            # Connect to server and send data
+            sock.connect((HOST, PORT))
+            sock.send(jsonObj) #or sendall
 
-        # Receive data from the server and shut down
-        received = sock.recv(5000)
-    finally:
-        sock.close()
+        finally:
+            sock.close()
 
-    print "Sent:     {}".format(data)
-    print "Received: {}".format(received)
+        print "Sent:     {}".format(data)
+    else:
+        try:
+            # Receive data from the server and shut down
+            received = sock.recv(5000)
+        finally:
+            sock.close()
+        return data
+
+        print "Received: {}".format(received)
+        
+        

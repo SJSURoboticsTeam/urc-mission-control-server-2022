@@ -20,5 +20,6 @@ from . import views
 
 urlpatterns = [
     path("", views.index, name="index"),
-    path("toRover", views.toRover, name="toRover")
+    path("drive", views.drive, name="toRover"),
+    
 ]
