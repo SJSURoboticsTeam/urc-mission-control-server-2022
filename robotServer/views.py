@@ -20,7 +20,9 @@ def drive(request):
     HOST, PORT = "localhost", 5000
 
     m ="{ hearbeat_count: 0,\n is_operational: 0,\n wheel_shift: 0,\n drive_mode: 'D',\n speed: 0,\n angle: 0 }"
-
+    
+    """
+    Format:
   {\n"
     "  \"heartbeat_count\": %d,\n"
     "  \"is  _operational\": %d,\n"
@@ -29,6 +31,8 @@ def drive(request):
     "  \"speed\": %d,\n"
     "  \"angle\": %d\n"
     "}
+    """
+
     jsonObj = json.loads(m)
 
     data = jsonObj
