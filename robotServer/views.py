@@ -19,8 +19,15 @@ def index(request):
 def drive(request):
     HOST, PORT = "localhost", 5000
 
-    m ="{ hearbeat_count: 0,\n is_operational: 0,\n wheel_shift: 0,\n drive_mode: 'D',\n speed: 0,\n angle: 0 }"
-    
+    m ="""
+    { hearbeat_count: 0,\n
+      is_operational: 0,\n 
+      wheel_shift: 0,\n 
+      drive_mode: 'D',\n 
+      speed: 0,\n 
+      angle: 0 }
+    """
+
     """
     Format:
   {\n"
@@ -48,14 +55,14 @@ def drive(request):
         finally:
             sock.close()
 
-        print "Sent:     {}".format(data)
+        print("Sent:     {}".format(data))
     else:
         try:
             # Receive data from the server and shut down
             received = sock.recv(5000)
         finally:
             sock.close()
-            print "Received: {}".format(received)
+            print("Received: {}".format(received))
         return data
 
         
@@ -107,14 +114,14 @@ def arm(request):
         finally:
             sock.close()
 
-        print "Sent:     {}".format(data)
+        print("Sent:     {}".format(data))
     else:
         try:
             # Receive data from the server and shut down
             received = sock.recv(5000)
         finally:
             sock.close()
-            print "Received: {}".format(received)
+            print("Received: {}".format(received))
         return data
 
 
